@@ -218,3 +218,30 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ------------------------------------------------------------
+# ANSYS (Workbench / Fluent / SpaceClaim): heavy or temporary files
+# Keep geometry (.x_t, .par, .scdocx) and Fluent journals/settings.
+# ------------------------------------------------------------
+*_files/
+*.wbpz
+*.cas
+*.dat
+*.cas.h5
+*.dat.h5
+*.cas.gz
+*.dat.gz
+*.msh
+*.msh.h5
+*.trn
+*.bak
+*.lock
+cleanup-fluent-*
+fluent-*.log
+*.asc
+dp0/
+# Workbench project file (re-add explicitly if you want to version it)
+*.wbpj
+
+# Office temporary files
+~$*
