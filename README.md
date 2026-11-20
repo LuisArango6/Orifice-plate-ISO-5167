@@ -71,6 +71,14 @@ The coarse mesh is left out of the GCI. Its edge sizing (1.4 mm) resolves the 1.
 
 **Reading:** the discretization uncertainty (about 0.5 %) is smaller than the 1.0–1.4 % difference from ISO 5167-2. That difference therefore comes mainly from the model (turbulence model and uniform inlet profile), not from the mesh. The uncertainty of the RHG equation itself is ±0.5 % for β = 0.6.
 
+### Fine mesh R03: convergence and comparison with ISO 5167-2
+
+![Cd simulated vs ISO 5167-2](results/R03_cd.png)
+
+The Cd settles after about 70 iterations at **0.6194**, which is 1.40 % above the RHG value (0.6108). The red band is the ±0.5 % uncertainty that ISO 5167-2 gives for the Cd at β = 0.6 (clause 5.3.3.1). The simulated value sits above it. Tap pressure histories: [P1](results/R03_p1.png), [P2](results/R03_p2.png). Data: [`results/R03_p1_p2_cd.xlsx`](results/R03_p1_p2_cd.xlsx).
+
+Check of the Cd expression: recomputing Cd in the spreadsheet from ΔP = p1 − p2, with V = 0.9812 m/s and ρ = 998.2 kg/m³, gives the same value Fluent reports at all 233 iterations.
+
 ### Transient start-up (R09)
 
 The pipe starts full of still water. At the inlet, the velocity ramps linearly from 0 to the Re_D = 1×10⁵ value in 0.1 s. The run uses the medium mesh, URANS k-ω SST, bounded second-order implicit time stepping and Δt = 1 ms. It ran up to t = 0.794 s.
@@ -84,13 +92,16 @@ The start-up run is used for visualization. It is not part of the Cd validation.
 ## Repository structure
 
 ```
-geometry/         Dimensioned drawing and CAD export of the fluid domain
-mesh/             Mesh settings and statistics
+geometry/         Dimensioned drawing (PDF, PNG) and SpaceClaim model (.scdocx) of the fluid domain
+mesh/             R03 fine mesh (104,613 cells) in Fluent format (.msh)
 setup/            Fluent settings and journals
+results/          Simulation log (Excel, CSV), R03 convergence data and figures
 results/raw/      Raw exported data (tap pressures, wall pressure, profiles)
 postprocessing/   Python scripts: reference Cd, CFD Cd, GCI, figures
 report/           Technical report
 ```
+
+The full simulation log, with mesh statistics, tap pressures, Cd and error for every run, is in [`results/simulation_log.csv`](results/simulation_log.csv).
 
 ## Roadmap
 
